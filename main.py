@@ -12,11 +12,7 @@ connection = pymysql.connect(
 
 
 def insert_to_tables():
-    # Opening JSON file
     json_file = open('poke_data.json')
-    
-    # returns JSON object as 
-    # a dictionary
     poke_data_dict = json.load(json_file)
     
     for pokemon_data in poke_data_dict:
@@ -26,14 +22,13 @@ def insert_to_tables():
             insert_pokemon_trainer_db(pokemon_data["id"],trainer["name"])
 
 def insert_pokemon_db(id, name, type, height, weight):
-    pass
-    # try:
-    #     with connection.cursor() as cursor:
-    #         query = f'INSERT INTO pokemon VALUES ({id}, "{name}", "{type}", {height}, {weight})'
-    #         cursor.execute(query)
-    #         connection.commit()
-    # except:
-    #     print("Error")
+    try:
+        with connection.cursor() as cursor:
+            query = f'INSERT INTO pokemon VALUES ({id}, "{name}", "{type}", {height}, {weight})'
+            cursor.execute(query)
+            connection.commit()
+    except TypeError as e:
+        print(e)
 
 
 
