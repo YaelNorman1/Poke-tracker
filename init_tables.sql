@@ -9,18 +9,16 @@ USE Poke_tracker;
 --     weight INT
 -- );
 
-
 -- CREATE TABLE trainer(
---     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
---     name VARCHAR(20),
+--     name VARCHAR(20) NOT NULL PRIMARY KEY,
 --     city VARCHAR(20)
 -- );
 
 
 -- CREATE TABLE pokemon_trainer(
 --     p_id INT NOT NULL,
---     t_id INT NOT NULL,
---     PRIMARY KEY (p_id,t_id),
+--     t_name VARCHAR(20) NOT NULL,
+--     PRIMARY KEY (p_id,t_name),
 --     FOREIGN KEY (p_id) REFERENCES pokemon(id),
---     FOREIGN KEY (t_id) REFERENCES trainer(id)
+--     FOREIGN KEY (t_name) REFERENCES trainer(name)
 -- );
