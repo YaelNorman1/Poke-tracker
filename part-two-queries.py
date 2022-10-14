@@ -70,8 +70,34 @@ def find_pokemon_roster(trainer_name):
         return e
 
 
+#   Extension
+
+def find_most_owned_pokemon():
+    try:
+        with connection.cursor() as cursor:
+            query = f'''SELECT p_name,owners_number
+                    FROM pokemon AS p
+                    JOIN (
+                    SELECT pokemon_trainer.p_id,
+                        Count(pokemon_trainer.p_id) as owners_number
+                    FROM pokemon_trainer
+                    GROUP BY pokemon_trainer.p_id
+                    ORDER BY owners_number DESC
+                    ) AS new_table ON (
+                    p.id = new_table.p_id
+                    )'''
+            cursor.execute(query)
+            result = cursor.fetchall()
+            max_number_of_owners = 0 if not result else result[0]["owners_number"]
+            return list(map(lambda p_name_owners_number_dict: p_name_owners_number_dict["p_name"],filter(lambda p_name_owners_number_dict: p_name_owners_number_dict["owners_number"] == max_number_of_owners , result)))
+    except TypeError as e:
+        return e
+
+
+
 if __name__ == "__main__":
     # print(get_heaviest_pokemon())
     # print(find_pokemons_by_type("grass"))
     # print(find_pokemon_owners("gengar"))
-    print(find_pokemon_roster("Loga"))
+    # print(find_pokemon_roster("Loga"))
+    print(find_most_owned_pokemon())
