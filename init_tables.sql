@@ -37,4 +37,3 @@ USE Poke_tracker;
 --     PRIMARY KEY (p_id,p_type)
 -- );
 
-
