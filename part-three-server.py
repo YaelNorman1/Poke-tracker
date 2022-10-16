@@ -2,6 +2,8 @@ import requests
 import uvicorn
 from fastapi import FastAPI, Request, HTTPException, status
 import pymysql
+from part_two_queries import find_pokemon_roster ,find_pokemon_owners
+
 
 app = FastAPI()
 
@@ -13,8 +15,6 @@ connection = pymysql.connect(
     charset="utf8",
     cursorclass=pymysql.cursors.DictCursor
 )
-
-
 
 @app.get("/pokemon", status_code=status.HTTP_200_OK)
 def get_pokemon(pokemon_name):
@@ -71,6 +71,19 @@ def insert_each_type(id, type):
             connection.commit()
     except TypeError as e:
         print(e)
+        
+
+@app.get("/pokemons/roster", status_code=status.HTTP_200_OK)
+def get_pokemons_by_trainer(trainer_name):
+    return find_pokemon_roster(trainer_name)
+    
+
+@app.get("/trainers/pokemon", status_code=status.HTTP_200_OK)
+def get_trainers_of_pokemon(pokemon_name):
+    return find_pokemon_owners(pokemon_name)
+
+    
+
 
 if __name__ == "__main__":
     uvicorn.run("part-three-server:app", host="0.0.0.0", port=8000, reload=True)
