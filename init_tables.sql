@@ -1,5 +1,5 @@
 -- CREATE DATABASE Poke_tracker;
--- USE Poke_tracker;
+USE Poke_tracker;
 
 -- DROP TABLE pokemon_trainer; 
 -- DROP TABLE pokemon_type; 
@@ -25,10 +25,10 @@
 --     FOREIGN KEY (t_name) REFERENCES trainer(name)
 -- );
 
-CREATE TABLE types(
-    id INT NOT NULL PRIMARY KEY,
-    t_name VARCHAR(20) NOT NULL
-);
+-- CREATE TABLE types(
+--     id INT NOT NULL PRIMARY KEY,
+--     t_name VARCHAR(20) NOT NULL
+-- );
 
 -- CREATE TABLE pokemon_type(
 --     p_id INT NOT NULL,
@@ -36,3 +36,5 @@ CREATE TABLE types(
 --     FOREIGN KEY (p_id) REFERENCES pokemon(id),
 --     PRIMARY KEY (p_id,p_type)
 -- );
+
+
