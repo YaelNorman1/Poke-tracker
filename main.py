@@ -22,6 +22,8 @@ def insert_to_tables():
             insert_trainer_db(trainer["name"],trainer["town"])
             insert_pokemon_trainer_db(pokemon_data["id"],trainer["name"])
 
+
+
 def insert_pokemon_db(id, name, height, weight):
     try:
         with connection.cursor() as cursor:

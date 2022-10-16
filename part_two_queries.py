@@ -28,7 +28,10 @@ def get_heaviest_pokemon():
 def find_pokemons_by_type(type):
     try:
         with connection.cursor() as cursor:
-            query = f'SELECT pokemon.p_name FROM pokemon WHERE pokemon.type = "{type}"'
+            query = f'''SELECT p.p_name FROM pokemon AS p
+             JOIN pokemon_type AS pt
+             ON pt.p_id = p.id
+             WHERE pt.p_type = "{type}"'''
             cursor.execute(query)
             result = cursor.fetchall()
             return list(map(lambda p_name_dict: p_name_dict["p_name"], result))
