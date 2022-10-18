@@ -13,8 +13,11 @@ connection = pymysql.connect(
 
 
 def insert_to_tables():
-    json_file = open('poke_data.json')
-    poke_data_dict = json.load(json_file)
+    try:
+        json_file = open('poke_data.json')
+        poke_data_dict = json.load(json_file)
+    except TypeError as e:
+        print("Couldn't load json file")
     
     for pokemon_data in poke_data_dict:
         insert_pokemon_db(pokemon_data["id"],pokemon_data["name"],pokemon_data["height"],pokemon_data["weight"])
@@ -58,7 +61,10 @@ def insert_pokemon_trainer_db(p_id,t_name):
 def insert_types_db():
     try:
         base_url = "https://pokeapi.co/api/v2/type/"
-        result=requests.get("https://pokeapi.co/api/v2/type/")
+        try:
+            result=requests.get("https://pokeapi.co/api/v2/type/")
+        except requests.exceptions.HTTPError as e:
+            return  "Types url doesn't exsits" 
         parsed = result.json()
         types =parsed["results"]
         types = list(map(lambda type: (int(type["url"].replace(base_url,'')[0:-1]),type["name"]),types))

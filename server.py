@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 import pokemon_route
+import trainer_route
 import uvicorn
 
 app = FastAPI()
 app.include_router(pokemon_route.router)
+app.include_router(trainer_route.router)
 
 @app.get("/")
 def root():

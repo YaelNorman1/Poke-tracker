@@ -1,11 +1,6 @@
 -- CREATE DATABASE Poke_tracker;
 USE Poke_tracker;
 
--- DROP TABLE pokemon_trainer; 
--- DROP TABLE pokemon_type; 
-
--- DROP TABLE pokemon; 
-
 -- CREATE TABLE pokemon(
 --     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 --     p_name VARCHAR(50),
@@ -13,10 +8,12 @@ USE Poke_tracker;
 --     height INT,
 --     weight INT
 -- );
+
 -- CREATE TABLE trainer(
 --     name VARCHAR(20) NOT NULL PRIMARY KEY,
 --     city VARCHAR(20)
 -- );
+
 -- CREATE TABLE pokemon_trainer(
 --     p_id INT NOT NULL,
 --     t_name VARCHAR(20) NOT NULL,

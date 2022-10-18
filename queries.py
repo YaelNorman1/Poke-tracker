@@ -1,13 +1,16 @@
 import pymysql
 
-connection = pymysql.connect(
-    host="localhost",
-    user="root",
-    password="",
-    db="poke_tracker",
-    charset="utf8",
-    cursorclass=pymysql.cursors.DictCursor
-)
+try:
+    connection = pymysql.connect(
+        host="localhost",
+        user="root",
+        password="",
+        db="poke_tracker",
+        charset="utf8",
+        cursorclass=pymysql.cursors.DictCursor
+    )
+except TypeError as e:
+    print(e)
 
 
 def insert_each_type(id, type):
@@ -95,5 +98,53 @@ def insert_to_pokemon_trainer_db_query(p_id,t_name):
             query = f"INSERT IGNORE INTO pokemon_trainer VALUES ({int(p_id)},'{t_name}')"
             cursor.execute(query)
             connection.commit()
+    except TypeError as e:
+        print(e)
+
+
+def find_pokemon_owners_db(pokemon_name):
+    try:
+        with connection.cursor() as cursor:
+            query = f'''SELECT pt.t_name 
+                        FROM pokemon_trainer AS pt
+                        JOIN pokemon
+                        ON (SELECT p.id FROM pokemon AS p WHERE p.p_name = "{pokemon_name}") = pt.p_id
+                        WHERE pokemon.p_name = "{pokemon_name}"'''
+            cursor.execute(query)
+            result = cursor.fetchall()
+            return list(map(lambda t_name_dict: t_name_dict["t_name"], result))
+    except TypeError as e:
+        print(e)
+
+
+def get_heaviest_pokemon():
+    try:
+        with connection.cursor() as cursor:
+            query = f'SELECT * FROM pokemon WHERE pokemon.weight = (SELECT MAX(pokemon.weight) FROM pokemon)'
+            cursor.execute(query)
+            result = cursor.fetchone()
+            return result
+    except TypeError as e:
+        print(e)
+
+
+def find_most_owned_pokemon():
+    try:
+        with connection.cursor() as cursor:
+            query = f'''SELECT p_name,owners_number
+                    FROM pokemon AS p
+                    JOIN (
+                    SELECT pokemon_trainer.p_id,
+                        Count(pokemon_trainer.p_id) as owners_number
+                    FROM pokemon_trainer
+                    GROUP BY pokemon_trainer.p_id
+                    ORDER BY owners_number DESC
+                    ) AS new_table ON (
+                    p.id = new_table.p_id
+                    )'''
+            cursor.execute(query)
+            result = cursor.fetchall()
+            max_number_of_owners = 0 if not result else result[0]["owners_number"]
+            return list(map(lambda p_name_owners_number_dict: p_name_owners_number_dict["p_name"],filter(lambda p_name_owners_number_dict: p_name_owners_number_dict["owners_number"] == max_number_of_owners , result)))
     except TypeError as e:
         print(e)
