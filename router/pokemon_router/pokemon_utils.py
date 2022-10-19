@@ -1,4 +1,4 @@
-from queries import *
+from ..queries import *
 
 def save_types_in_tabels(pokemon_id, pokemon_types):
     for type in pokemon_types:
