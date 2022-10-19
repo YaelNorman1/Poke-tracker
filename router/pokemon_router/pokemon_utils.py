@@ -1,3 +1,4 @@
+from wsgiref import validate
 import requests
 from ..queries import *
 
@@ -19,11 +20,10 @@ def find_pokemons_by_type(type):
 
 def delete_pokemon_of_trainer_from_db(pokemon_name, trainer_name):
     try:
-        return delete_pokemon_of_trainer_from_db_query(pokemon_name, trainer_name)
-    except Exception as e:
-        return e
-        raise Exception("pokemon or trainer do not exist, sorry")
-
+        delete_pokemon_of_trainer_from_db_query(pokemon_name, trainer_name)
+    except Exception:
+        return {"Error":"pokemon or trainer do not exist, sorry"}
+  
 
 def return_next_form(pokemon_name,evolution_chain):
     chain = evolution_chain["chain"]
@@ -40,15 +40,7 @@ def insert_to_pokemon_trainer_db(p_id,t_name):
 
 
 def update_db_evolve(old_pokemon_name, new_pokemon_name, trainer_name):
-    try:
-        delete_pokemon_of_trainer_from_db(old_pokemon_name, trainer_name)
-    except Exception as e:
-        return {"Error":e}
-
-
-    pokemon_id = get_pokemon_data(new_pokemon_name)["id"]
-    insert_to_pokemon_trainer_db(pokemon_id, trainer_name)
-
+    return delete_pokemon_of_trainer_from_db(old_pokemon_name, trainer_name)
 
 def call_pokemon_api(pokemon_name):
     try:

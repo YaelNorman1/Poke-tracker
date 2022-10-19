@@ -83,6 +83,8 @@ def find_pokemons_by_type_db(type):
 
 def delete_pokemon_of_trainer_from_db_query(pokemon_name, trainer_name):
     pokemon_id = get_pokemon_data_db(pokemon_name)["id"]
+    if not validate_pokemon_of_trainer_in_table_db(pokemon_id, trainer_name):
+        raise Exception({"Error":"pokemon or trainer do not exist, sorry"})
     try:
         with connection.cursor() as cursor:
             query = f'DELETE FROM pokemon_trainer WHERE (pokemon_trainer.p_id = {pokemon_id} AND pokemon_trainer.t_name = "{trainer_name}");'
@@ -90,8 +92,19 @@ def delete_pokemon_of_trainer_from_db_query(pokemon_name, trainer_name):
             connection.commit()
     except Exception:
         raise Exception({"Error":"pokemon or trainer do not exist, sorry"})
-    except TypeError as e:
+
+
+def validate_pokemon_of_trainer_in_table_db(pokemon_id, trainer_name):
+    try:
+        with connection.cursor() as cursor:
+            query = f'SELECT * FROM pokemon_trainer WHERE (pokemon_trainer.p_id = {pokemon_id} AND pokemon_trainer.t_name = "{trainer_name}");'
+            cursor.execute(query)
+            result = cursor.fetchall()
+            return result
+    except Exception:
         raise Exception({"Error":"pokemon or trainer do not exist, sorry"})
+
+
 
 def insert_to_pokemon_trainer_db_query(p_id,t_name):
     try:

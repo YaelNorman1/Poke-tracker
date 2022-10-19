@@ -52,3 +52,5 @@ USE Poke_tracker;
 
 
 -- DELETE FROM pokemon_trainer WHERE (pokemon_trainer.p_id = 21 AND pokemon_trainer.t_name = "Archie")
+
+-- SELECT * FROM pokemon_trainer WHERE (pokemon_trainer.p_id = 21 AND pokemon_trainer.t_name = "Archie");

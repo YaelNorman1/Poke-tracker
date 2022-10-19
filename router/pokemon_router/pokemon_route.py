@@ -44,7 +44,7 @@ def add_pokemon(pokemon_name, response: Response):
 
 @router.delete("/pokemons", status_code=status.HTTP_200_OK)
 def delete_pokemon_of_trainer(pokemon_name,trainer_name):
-    delete_pokemon_of_trainer_from_db(pokemon_name, trainer_name)   
+    return delete_pokemon_of_trainer_from_db(pokemon_name, trainer_name)   
 
 
 @router.put("/pokemons/evolve", status_code=status.HTTP_200_OK)
@@ -63,4 +63,3 @@ def evolve_pokemon_of_trainer(pokemon_name,trainer_name):
         return  {"Error" : "next form doesn't exists"}
     if next_form:
         return update_db_evolve(pokemon_name,next_form,trainer_name)
-    return 1
