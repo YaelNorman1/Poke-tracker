@@ -1,6 +1,7 @@
 import requests
 import pymysql 
 import json
+from pymysql import IntegrityError
 
 connection = pymysql.connect(
     host="localhost",
@@ -33,6 +34,10 @@ def insert_pokemon_db(id, name, height, weight):
             query = f'INSERT INTO pokemon VALUES ({id}, "{name}", {height}, {weight})'
             cursor.execute(query)
             connection.commit()
+            return {"Success" : "Added pokemon successfuly"}
+    except IntegrityError:
+        raise Exception("Pokemon name alredy exsits")
+        # return {"Error" : "Pokemon name alredy exsits"}
     except TypeError as e:
         print(e)
 

@@ -88,8 +88,10 @@ def delete_pokemon_of_trainer_from_db_query(pokemon_name, trainer_name):
             query = f'DELETE FROM pokemon_trainer WHERE (pokemon_trainer.p_id = {pokemon_id} AND pokemon_trainer.t_name = "{trainer_name}");'
             cursor.execute(query)
             connection.commit()
+    except Exception:
+        raise Exception({"Error":"pokemon or trainer do not exist, sorry"})
     except TypeError as e:
-        print(e)
+        
 
 def insert_to_pokemon_trainer_db_query(p_id,t_name):
     try:
