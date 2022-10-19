@@ -91,7 +91,7 @@ def delete_pokemon_of_trainer_from_db_query(pokemon_name, trainer_name):
     except Exception:
         raise Exception({"Error":"pokemon or trainer do not exist, sorry"})
     except TypeError as e:
-        
+        raise Exception({"Error":"pokemon or trainer do not exist, sorry"})
 
 def insert_to_pokemon_trainer_db_query(p_id,t_name):
     try:

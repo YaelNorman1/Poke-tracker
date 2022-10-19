@@ -60,19 +60,19 @@ def test_evolve_pinser():
     assert "Error" in response_message 
 
 
-def test_evolve_pokemon_does_not_exist():
-    response= client.put("/pokemons/evolve?pokemon_name=spearow&trainer_name=Archie")
-    response_message = response.json()
-    #assert response.status_code == 403
-    assert "Error" in response_message
+# def test_evolve_pokemon_does_not_exist():
+#     response= client.put("/pokemons/evolve?pokemon_name=spearow&trainer_name=Archie")
+#     response_message = response.json()
+#     #assert response.status_code == 403
+#     assert "Error" in response_message
 
 
-# def test_delete_pokemon():
-#     before_delete_trainers_pokemon= client.get("/pokemons?trainer_name=Whitney")
-#     if "venusaur" in before_delete_trainers_pokemon:
-#         delete_pokemon= client.delete("/pokemons?pokemon_name=venusaur&trainer_name=Whitney")
-#         after_delete_trainers_pokemon= client.get("/pokemons?trainer_name=Whitney")
-#         assert delete_pokemon.status_code == 200
-#         assert "venusaur" not in after_delete_trainers_pokemon
-#         assert before_delete_trainers_pokemon != after_delete_trainers_pokemon
+def test_delete_pokemon():
+    before_delete_trainers_pokemon= client.get("/pokemons?trainer_name=Whitney")
+    # if "venusaur" in before_delete_trainers_pokemon:
+    delete_pokemon= client.delete("/pokemons?pokemon_name=venusaur&trainer_name=Whitney")
+    after_delete_trainers_pokemon= client.get("/pokemons?trainer_name=Whitney")
+    assert delete_pokemon.status_code == 200
+    assert "venusaur" not in after_delete_trainers_pokemon
+    assert before_delete_trainers_pokemon != after_delete_trainers_pokemon
     
