@@ -12,7 +12,6 @@ try:
 except TypeError as e:
     print(e)
 
-
 def insert_each_type(id, type):
     try:
         with connection.cursor() as cursor:

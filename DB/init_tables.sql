@@ -1,5 +1,5 @@
 -- CREATE DATABASE Poke_tracker;
-USE Poke_tracker;
+-- USE Poke_tracker;
 
 -- CREATE TABLE pokemon(
 --     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

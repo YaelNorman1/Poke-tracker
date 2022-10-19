@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status
-from trainer_route_utils import *
-from main import insert_trainer_db
+from .trainer_utils import *
+from DB.json_parser import insert_trainer_db
 
 router = APIRouter()
 

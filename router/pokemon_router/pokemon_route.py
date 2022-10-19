@@ -1,5 +1,5 @@
 from fastapi import APIRouter, status
-from pokemon_route_utils import *
+from .pokemon_utils import *
 import requests
 
 router = APIRouter()
