@@ -15,7 +15,7 @@ connection = pymysql.connect(
 
 def insert_to_tables():
     try:
-        json_file = open('poke_data.json')
+        json_file = open('DB\poke_data.json')
         poke_data_dict = json.load(json_file)
     except TypeError as e:
         print("Couldn't load json file")
@@ -82,4 +82,5 @@ def insert_types_db():
    
 
 if __name__ == "__main__":
-    insert_to_tables()
+    # insert_to_tables()
+    insert_types_db()

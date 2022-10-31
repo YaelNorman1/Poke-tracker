@@ -27,6 +27,7 @@ USE Poke_tracker;
 --     t_name VARCHAR(20) NOT NULL
 -- );
 
+
 -- CREATE TABLE pokemon_type(
 --     p_id INT NOT NULL,
 --     p_type VARCHAR(20) NOT NULL,
@@ -34,23 +35,3 @@ USE Poke_tracker;
 --     PRIMARY KEY (p_id,p_type)
 -- );
 
--- INSERT INTO pokemon_type VALUES (133,"normal")
--- SELECT * FROM pokemon_type
-
-
--- INSERT INTO pokemon VALUES (222,"yamna",10,10)
--- INSERT INTO pokemon_type VALUES (222,"bug")
--- INSERT INTO pokemon_type VALUES (222,"flying")
-
-
-
-
--- SELECT * FROM pokemon 
--- SELECT * FROM pokemon_type
--- SELECT p_type FROM pokemon_type WHERE p_id = 193
--- SELECT * FROM pokemon_trainer WHERE t_name='Archie'
-
-
--- DELETE FROM pokemon_trainer WHERE (pokemon_trainer.p_id = 21 AND pokemon_trainer.t_name = "Archie")
-
--- SELECT * FROM pokemon_trainer WHERE (pokemon_trainer.p_id = 21 AND pokemon_trainer.t_name = "Archie");
