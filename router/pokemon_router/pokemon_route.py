@@ -2,7 +2,6 @@ from fastapi import APIRouter, status , Response
 from .pokemon_utils import *
 from DB.json_parser import insert_pokemon_db
 
-# import requests
 
 router = APIRouter()
 

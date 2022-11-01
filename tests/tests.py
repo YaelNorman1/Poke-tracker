@@ -1,4 +1,3 @@
-# from unittest import mock
 from fastapi.testclient import TestClient
 from router.pokemon_router.pokemon_utils import get_pokemon_types, find_pokemon_roster
 from server import app
@@ -63,7 +62,6 @@ def test_evolve_pinser():
 def test_evolve_pokemon_does_not_exist():
     response= client.put("/pokemons/evolve?pokemon_name=spearow&trainer_name=Archie")
     response_message = response.json()
-    #assert response.status_code == 403
     assert response_message["Error"] == "pokemon or trainer do not exist, sorry"
 
 

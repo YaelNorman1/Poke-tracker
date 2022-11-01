@@ -37,7 +37,6 @@ def insert_pokemon_db(id, name, height, weight):
             return {"Success" : "Added pokemon successfuly"}
     except IntegrityError:
         raise Exception("Pokemon name alredy exsits")
-        # return {"Error" : "Pokemon name alredy exsits"}
     except TypeError as e:
         print(e)
 
@@ -82,5 +81,4 @@ def insert_types_db():
    
 
 if __name__ == "__main__":
-    # insert_to_tables()
     insert_types_db()
