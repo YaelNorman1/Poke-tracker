@@ -2,3 +2,4 @@ node_modules
 jsfiles
 __pycache__
 .pytest_cashe
+.vscode
